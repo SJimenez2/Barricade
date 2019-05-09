@@ -1,10 +1,10 @@
 var p1, height, scale, board;
 
 function setup() {
-	boardDimensions();
+  boardDimensions();
   createCanvas(height, height);
-	startLocations();
-	visuals();
+  startLocations();
+  visuals();
 }
 
 function boardDimensions() {
@@ -21,21 +21,26 @@ function startLocations() {
 }
 
 function draw() {
-	//Not used due to wanting the jumpy aesthetic of game
-	// setTimeout doesnt work since draw is already in a continuous
+  //Not used due to wanting the jumpy aesthetic of game
+  // setTimeout doesnt work since draw is already in a continuous
 }
 
 function visuals() {
   background(0);
   fill(51);
   rect(height * 0.025, height * 0.025, board, board);
-	p1.kill();
+  p1.kill();
   p1.update()
-	p1.show();
-	setTimeout(visuals, 200);
+  p1.show();
+  setTimeout(visuals, 200);
 }
 
 function keyPressed() {
+  // r key to restart
+  if (keyCode === 82) {
+    startLocations();
+  }
+
   // player 1
   if (keyCode === 87) {
     p1.direction(0, -1);
