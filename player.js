@@ -2,6 +2,7 @@ class Player {
   height = 0
   moveY = 0;
   moveX = 0;
+  dead = false;
   total = 0;
   baricade = [];
 
@@ -16,13 +17,17 @@ class Player {
   show() {
     fill(255);
     for (var i = 0; i < this.baricade.length; i++) {
-      fill(255);
+      if(i == this.baricade.length-1 && this.dead) {
+        fill(255,0,0);
+      } else {
+        fill(255);
+      }
       rect(this.baricade[i].x, this.baricade[i].y, this.scale, this.scale);
     }
   }
 
   update() {
-    if(this.moveX != 0 || this.moveY != 0) {
+    if(!this.dead && (this.moveX != 0 || this.moveY != 0)) {
       this.total++;
       this.baricade[this.baricade.length] = createVector(this.x, this.y);
       this.x = this.x + this.moveX * this.scale;
