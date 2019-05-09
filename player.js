@@ -26,14 +26,16 @@ class Player {
     this.barricade = [];
     this.x = x;
     this.y = y;
+    this.moveX = 0;
+    this.moveY = 0;
     this.dead = false;
-    this.barricade[this.total++] = createVector(x, y);
+    this.barricade[this.total++] = {x: x, y: y};
   }
 
   update() {
     if (!this.dead && (this.moveX != 0 || this.moveY != 0)) {
       this.total++;
-      this.barricade[this.barricade.length] = createVector(this.x, this.y);
+      this.barricade[this.barricade.length] = {x: this.x, y: this.y};
       this.x = this.x + this.moveX * this.scale;
       this.y = this.y + this.moveY * this.scale;
     }
@@ -59,13 +61,29 @@ class Player {
     return this.dead;
   }
 
+  hitBarricade(x, y) {
+    for (var i = 0; i < this.barricade.length; i++) {
+      if(this.barricade[i].x == x && this.barricade[i].y == y){
+        this.barricade[this.barricade.length] = {x: x, y: y};
+        this.dead = true;
+        this.direction(0, 0);
+        return true;
+      }
+    }
+  }
+
   kill() {
+    if(this.moveX == 0 && this.moveY == 0){ return false;}
     if (this.x > this.height || this.y > this.height || this.x < 1 || this.y < 1) {
-      this.barricade[this.barricade.length] = createVector(this.x, this.y);
+      this.barricade[this.barricade.length] = {x: this.x, y: this.y};
       this.dead = true;
       this.direction(0, 0);
       return true;
     }
+    if(this.hitBarricade(this.x, this.y)) {
+      return true;
+    }
+
     return false;
   }
 }

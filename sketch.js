@@ -11,17 +11,17 @@ function setup() {
 }
 
 function boardDimensions() {
-  height = windowHeight * 3 / 4;
-  boarder = height * 0.025
+  height = Math.round(windowHeight * 3 / 4);
+  boarder = Math.round(height * 0.025);
   board = height - boarder - boarder;
-  scale = board / 30;
+  scale = Math.round(board / 30);
 }
 
 function startLocations() {
   var startX = Math.floor(Math.random() * 14) + 1;
   var startY = Math.floor(Math.random() * 14) + 1;
-  p1.reset(boarder + scale * startX, boarder + scale * startY);
-  p2.reset(boarder + scale * (30 - startX), boarder + scale * (30 - startY));
+  p1.reset(scale * startX, scale * startY);
+  p2.reset(scale * (30 - startX), scale * (30 - startY));
 }
 
 function draw() {
@@ -32,17 +32,16 @@ function draw() {
 function visuals() {
   background(0);
   fill(51);
-  rect(height * 0.025, height * 0.025, board, board);
+  translate(boarder, boarder);
+  rect(0, 0, board, board);
   if (!p1.isdead() && !p2.isdead()) {
-    if (!p1.isdead() && !p2.isdead()) {
-      p1.update();
-      if (p1.kill()) {
-        p2.incrementScore();
-      }
-      p2.update();
-      if (p2.kill()) {
-        p1.incrementScore();
-      }
+    p1.update();
+    if (p1.kill() || p2.hitBarricade(p1.x, p1.y)) {
+      p2.incrementScore();
+    }
+    p2.update();
+    if (p2.kill() || p1.hitBarricade(p2.x, p2.y)) {
+      p1.incrementScore();
     }
   }
 
