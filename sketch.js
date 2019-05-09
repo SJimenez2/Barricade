@@ -1,9 +1,16 @@
-var p1, height;
+var p1, height, scale, board;
 
 function setup() {
 	boardDimensions();
   createCanvas(height, height);
-	p1 = new Player(10, height, 100, 100);
+	p1 = new Player(scale, height, 100, 100);
+}
+
+function boardDimensions() {
+  height = windowHeight * 3 / 4;
+  boarder = height * 0.025
+  board = height - boarder - boarder;
+  scale = board / 30;
 }
 
 function draw() {
@@ -14,9 +21,11 @@ function draw() {
 	p1.update();
 }
 
-function boardDimensions() {
-  height = windowHeight * 3 / 4;
-  boarder = height * 0.025
-  board = height - boarder - boarder;
-  scale = board / 30;
+function visuals() {
+  background(0);
+  fill(51);
+  rect(height * 0.025, height * 0.025, board, board);
+  p1.update()
+	p1.show();
+	setTimeout(visuals, 200);
 }
