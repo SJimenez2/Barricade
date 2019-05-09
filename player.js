@@ -14,24 +14,23 @@ class Player {
     this.baricade[this.total++] = createVector(startX, startY);
   }
 
-  show() {
-    fill(255);
-    for (var i = 0; i < this.baricade.length; i++) {
-      if(i == this.baricade.length-1 && this.dead) {
-        fill(255,0,0);
-      } else {
-        fill(255);
-      }
-      rect(this.baricade[i].x, this.baricade[i].y, this.scale, this.scale);
-    }
-  }
-
   update() {
-    if(!this.dead && (this.moveX != 0 || this.moveY != 0)) {
+    if (!this.dead && (this.moveX != 0 || this.moveY != 0)) {
       this.total++;
       this.baricade[this.baricade.length] = createVector(this.x, this.y);
       this.x = this.x + this.moveX * this.scale;
       this.y = this.y + this.moveY * this.scale;
+    }
+  }
+
+  show() {
+    for (var i = 0; i < this.baricade.length; i++) {
+      if (i == this.baricade.length - 1 && this.dead) {
+        fill(255, 0, 0);
+      } else {
+        fill(255);
+      }
+      rect(this.baricade[i].x, this.baricade[i].y, this.scale, this.scale);
     }
   }
 
@@ -40,8 +39,12 @@ class Player {
     this.moveY = y;
   }
 
+  isdead() {
+    return this.dead;
+  }
+
   kill() {
-    if(this.x > this.height || this.y > this.height || this.x < 1 || this.y < 1) {
+    if (this.x > this.height || this.y > this.height || this.x < 1 || this.y < 1) {
       this.baricade[this.baricade.length] = createVector(this.x, this.y);
       this.dead = true;
       this.direction(0, 0);

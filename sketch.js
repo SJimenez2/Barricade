@@ -30,8 +30,10 @@ function visuals() {
   background(0);
   fill(51);
   rect(height * 0.025, height * 0.025, board, board);
-  p1.kill();
-  p1.update()
+	if (!p1.isdead()) {
+    p1.update();
+		p1.kill();
+  }
   p1.show();
   setTimeout(visuals, 200);
 }
