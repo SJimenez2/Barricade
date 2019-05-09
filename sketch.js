@@ -32,13 +32,19 @@ function visuals() {
   fill(51);
   rect(height * 0.025, height * 0.025, board, board);
   if (!p1.isdead() && !p2.isdead()) {
-    p1.kill();
-    p1.update();
-    p2.kill();
-    p2.update();
+    if (!p1.isdead() && !p2.isdead()) {
+      p1.update();
+      if (p1.kill()) {
+        p2.incrementScore();
+      }
+      p2.update();
+      if (p2.kill()) {
+        p1.incrementScore();
+      }
+    }
   }
   p1.show();
-	p2.show();
+  p2.show();
   setTimeout(visuals, 200);
 }
 
@@ -47,7 +53,7 @@ function keyPressed() {
   if (restart) {
     restart = false;
     p1.direction(0, 1);
-		p2.direction(0, -1);
+    p2.direction(0, -1);
     return;
   }
 
@@ -68,7 +74,7 @@ function keyPressed() {
     p1.direction(-1, 0);
   }
 
-	// player 2
+  // player 2
   if (keyCode === UP_ARROW) {
     p2.direction(0, -1);
   } else if (keyCode === DOWN_ARROW) {

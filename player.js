@@ -1,7 +1,8 @@
 class Player {
   height = 0
-  moveY = 0;
   moveX = 0;
+  moveY = 0;
+  score = 0;
   dead = false;
   total = 0;
   baricade = [];
@@ -12,6 +13,14 @@ class Player {
     this.x = startX;
     this.y = startY;
     this.baricade[this.total++] = createVector(startX, startY);
+  }
+
+  getScore() {
+    return this.score;
+  }
+
+  incrementScore() {
+    this.score++;
   }
 
   update() {
