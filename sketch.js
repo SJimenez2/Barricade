@@ -43,6 +43,9 @@ function visuals() {
       }
     }
   }
+
+  document.getElementById("p1Score").innerHTML = p1.getScore();
+  document.getElementById("p2Score").innerHTML = p2.getScore();
   p1.show();
   p2.show();
   setTimeout(visuals, 200);
