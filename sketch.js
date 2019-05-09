@@ -4,6 +4,7 @@ function setup() {
 	boardDimensions();
   createCanvas(height, height);
 	startLocations();
+	visuals();
 }
 
 function boardDimensions() {
@@ -20,17 +21,15 @@ function startLocations() {
 }
 
 function draw() {
-	background(0);
-	fill(51);
-	rect(height * 0.025, height * 0.025, board, board);
-	p1.show();
-	p1.update();
+	//Not used due to wanting the jumpy aesthetic of game
+	// setTimeout doesnt work since draw is already in a continuous
 }
 
 function visuals() {
   background(0);
   fill(51);
   rect(height * 0.025, height * 0.025, board, board);
+	p1.kill();
   p1.update()
 	p1.show();
 	setTimeout(visuals, 200);

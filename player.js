@@ -34,4 +34,14 @@ class Player {
     this.moveX = x;
     this.moveY = y;
   }
+
+  kill() {
+    if(this.x > this.height || this.y > this.height || this.x < 1 || this.y < 1) {
+      this.baricade[this.baricade.length] = createVector(this.x, this.y);
+      this.dead = true;
+      this.direction(0, 0);
+      return true;
+    }
+    return false;
+  }
 }
