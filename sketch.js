@@ -35,3 +35,16 @@ function visuals() {
 	p1.show();
 	setTimeout(visuals, 200);
 }
+
+function keyPressed() {
+  // player 1
+  if (keyCode === 87) {
+    p1.direction(0, -1);
+  } else if (keyCode === 83) {
+    p1.direction(0, 1);
+  } else if (keyCode === 68) {
+    p1.direction(1, 0);
+  } else if (keyCode === 65) {
+    p1.direction(-1, 0);
+  }
+}

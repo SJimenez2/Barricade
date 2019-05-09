@@ -29,4 +29,9 @@ class Player {
       this.y = this.y + this.moveY * this.scale;
     }
   }
+
+  direction(x, y) {
+    this.moveX = x;
+    this.moveY = y;
+  }
 }
