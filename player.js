@@ -1,6 +1,6 @@
 class Player {
   height = 0
-  moveY = 1;
+  moveY = 0;
   moveX = 0;
   total = 0;
   baricade = [];

@@ -1,4 +1,5 @@
 var p1, height, scale, board;
+var restart = true;
 
 function setup() {
   boardDimensions();
@@ -36,9 +37,17 @@ function visuals() {
 }
 
 function keyPressed() {
+	// press a key to start game
+	if (restart) {
+    restart = false;
+    p1.direction(0, 1);
+    return;
+  }
+
   // r key to restart
   if (keyCode === 82) {
     startLocations();
+		restart = true;
   }
 
   // player 1
