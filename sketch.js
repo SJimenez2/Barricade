@@ -4,6 +4,8 @@ var restart = true;
 function setup() {
   boardDimensions();
   createCanvas(height, height);
+  p1 = new Player(scale, board);
+  p2 = new Player(scale, board);
   startLocations();
   visuals();
 }
@@ -18,8 +20,8 @@ function boardDimensions() {
 function startLocations() {
   var startX = Math.floor(Math.random() * 14) + 1;
   var startY = Math.floor(Math.random() * 14) + 1;
-  p1 = new Player(scale, board, boarder + scale * startX, boarder + scale * startY);
-  p2 = new Player(scale, board, boarder + scale * (30 - startX), boarder + scale * (30 - startY));
+  p1.reset(boarder + scale * startX, boarder + scale * startY);
+  p2.reset(boarder + scale * (30 - startX), boarder + scale * (30 - startY));
 }
 
 function draw() {
